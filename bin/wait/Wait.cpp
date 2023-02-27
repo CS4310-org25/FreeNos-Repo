@@ -1,20 +1,3 @@
-/*
- * Copyright (C) 2009 Niek Linnenbank
- * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -26,8 +9,8 @@
 Wait::Wait(int argc, char **argv)
     : POSIXApplication(argc, argv)
 {
-    parser().setDescription("Stop executing for some time");
-    parser().registerPositional("SECONDS", "Stop executing for the given number of seconds");
+    parser().setDescription("Wait for specific process to change state");
+    parser().registerPositional("PID", "Wait for process with ID to change stage");
 }
 
 Wait::~Wait()
@@ -36,22 +19,19 @@ Wait::~Wait()
 
 Wait::Result Wait::exec()
 {
-    int sec = 0;
+    int pid = 0, status;
 
-    // Convert input to seconds
-    if ((sec = atoi(arguments().get("SECONDS"))) <= 0)
+    if ((pid = atoi(arguments().get("PID"))) <= 16)
     {
-        ERROR("invalid Wait time `" << arguments().get("SECONDS") << "'");
+        ERROR("Invalid Argument: Attempted to wait on non-child process");
         return InvalidArgument;
     }
 
-    // Wait now
-    if (wait(sec) != 0)
+    if (waitpid(pid, &status, 0) == -1)
     {
-        ERROR("failed to wait: " << strerror(errno));
-        return IOError;
+        ERROR("Invalid Argument: No process of ID " << arguments().get("PID") << " found");
+        return InvalidArgument;
     }
 
-    // Done
     return Success;
 }
