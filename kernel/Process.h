@@ -246,6 +246,9 @@ class Process
     /** Process Identifier */
     const ProcessID m_id;
 
+    /** Priority level of process*/
+    int PriorityLevel;
+
     /** Parent process */
     ProcessID m_parent;
 
