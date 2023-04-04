@@ -103,6 +103,13 @@ class Process
     ProcessID getParent() const;
 
     /**
+     * Retrieve our prority level
+     *
+     * @return priority level of process
+     */
+    u8 getPriorityLevel() const;
+
+    /**
      * Get Wait ID.
      */
     ProcessID getWait() const;
@@ -245,6 +252,9 @@ class Process
 
     /** Process Identifier */
     const ProcessID m_id;
+
+    /** Priority level of process*/
+    u8 m_priorityLevel;
 
     /** Parent process */
     ProcessID m_parent;
