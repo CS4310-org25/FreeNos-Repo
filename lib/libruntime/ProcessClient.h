@@ -78,6 +78,7 @@ class ProcessClient
      */
     ProcessID getProcessID() const;
 
+    API::Result setPriority(ProcessID pid, int newPriority);
     /**
      * Get parent process identifier
      *

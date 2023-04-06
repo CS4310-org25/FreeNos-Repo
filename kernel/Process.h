@@ -107,7 +107,15 @@ class Process
      *
      * @return priority level of process
      */
-    u8 getPriorityLevel() const;
+    int getPriorityLevel() const;
+
+    /**
+     * Set our prority level
+     *
+     * @param priorityLvl the value you want to set process to
+     * @return if setting priority level is successful
+     */
+    bool setPriorityLevel(int priorityLvl);
 
     /**
      * Get Wait ID.
@@ -254,7 +262,7 @@ class Process
     const ProcessID m_id;
 
     /** Priority level of process*/
-    u8 m_priorityLevel;
+    int m_priorityLevel;
 
     /** Parent process */
     ProcessID m_parent;

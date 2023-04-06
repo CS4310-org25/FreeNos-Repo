@@ -94,6 +94,10 @@ API::Result ProcessCtlHandler(const ProcessID procID,
         }
         break;
 
+    case RenicePID:
+        proc->setPriorityLevel(addr);
+        break;
+
     case Reset:
         if (procs->reset(proc, addr) != ProcessManager::Success)
         {
