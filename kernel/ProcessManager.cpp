@@ -421,3 +421,19 @@ ProcessManager::Result ProcessManager::dequeueProcess(Process *proc, const bool 
 
     return Success;
 }
+
+
+ProcessManager::Result ProcessManager::requeueProcess(Process *proc)
+{
+	const Result rd = dequeueProcess(proc, true);
+	if(rd != Success)
+	{
+		FATAL("Failed to dequeue PID" << proc->getID());
+	}
+	const Result re = enqueueProcess(proc, true);
+	if(re != Success)
+	{
+		FATAL("Failed to enqueue PID" << proc->getID());
+	}
+	return Success;
+}

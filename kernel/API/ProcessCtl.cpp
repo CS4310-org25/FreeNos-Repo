@@ -96,6 +96,8 @@ API::Result ProcessCtlHandler(const ProcessID procID,
 
     case RenicePID:
         proc->setPriorityLevel(addr);
+	procs->requeueProcess(proc);
+	procs->schedule();
         break;
 
     case Reset:

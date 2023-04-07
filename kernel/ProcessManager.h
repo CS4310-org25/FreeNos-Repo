@@ -197,6 +197,8 @@ class ProcessManager
      */
     Result interruptNotify(const u32 vector);
 
+	Result requeueProcess(Process *proc);
+
     /**
      * Set the idle process.
      */
