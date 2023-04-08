@@ -1,7 +1,7 @@
 
-# Wait For It...
+# Project 3: Prioritize It...
 
-Implementing the wait command in FreeNOS
+Implementing the renice command and multilevel priority in FreeNOS
 
 # Team Members
 Dylan Lim
@@ -9,4 +9,4 @@ Dylan Lim
 Renwell Queyquep
 
 # Link to Demonstration
-https://streamable.com/oh6hbq
+https://www.youtube.com/watch?v=EWyOrr447gw
